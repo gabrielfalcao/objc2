@@ -389,14 +389,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "iai"
-version = "0.1.1"
-source = "git+https://github.com/madsmtm/iai?branch=callgrind#c19e72306bef1a8a53305a926524e710a937eba0"
-dependencies = [
- "cfg-if",
-]
-
-[[package]]
 name = "indexmap"
 version = "2.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -525,7 +517,6 @@ dependencies = [
  "backtrace",
  "block2",
  "core-foundation",
- "iai",
  "libc",
  "memoffset",
  "objc2-app-kit",
