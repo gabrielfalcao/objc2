@@ -43,22 +43,39 @@ define_class!(
                 .downcast::<NSApplication>()
                 .unwrap();
 
-            let text_field = unsafe {
-                let text_field = NSTextField::labelWithString(ns_string!("Hello, World!"), mtm);
-                text_field.setFrame(NSRect::new(
-                    NSPoint::new(5.0, 100.0),
+            let text_field_hello = unsafe {
+                let text_field_hello = NSTextField::labelWithString(ns_string!("Hello"), mtm);
+                text_field_hello.setFrame(NSRect::new(
+                    NSPoint::new(5.0, 150.0),
                     NSSize::new(290.0, 100.0),
                 ));
-                text_field.setTextColor(Some(&NSColor::colorWithSRGBRed_green_blue_alpha(
-                    0.0, 0.5, 0.0, 1.0,
+                text_field_hello.setTextColor(Some(&NSColor::colorWithSRGBRed_green_blue_alpha(
+                    0.3, 0.3, 0.3, 0.7,
                 )));
-                text_field.setAlignment(NSTextAlignment::Center);
-                text_field.setFont(Some(&NSFont::systemFontOfSize(45.0)));
-                text_field.setAutoresizingMask(
+                text_field_hello.setAlignment(NSTextAlignment::Center);
+                text_field_hello.setFont(Some(&NSFont::systemFontOfSize(63.0)));
+                text_field_hello.setAutoresizingMask(
                     NSAutoresizingMaskOptions::ViewWidthSizable
                         | NSAutoresizingMaskOptions::ViewHeightSizable,
                 );
-                text_field
+                text_field_hello
+            };
+            let text_field_world = unsafe {
+                let text_field_world = NSTextField::labelWithString(ns_string!("World"), mtm);
+                text_field_world.setFrame(NSRect::new(
+                    NSPoint::new(5.0, 100.0),
+                    NSSize::new(290.0, 100.0),
+                ));
+                text_field_world.setTextColor(Some(&NSColor::colorWithSRGBRed_green_blue_alpha(
+                    0.3, 0.3, 0.3, 1.0,
+                )));
+                text_field_world.setAlignment(NSTextAlignment::Center);
+                text_field_world.setFont(Some(&NSFont::systemFontOfSize(71.0)));
+                text_field_world.setAutoresizingMask(
+                    NSAutoresizingMaskOptions::ViewWidthSizable
+                        | NSAutoresizingMaskOptions::ViewHeightSizable,
+                );
+                text_field_world
             };
 
             // SAFETY: We disable releasing when closed below.
@@ -80,9 +97,16 @@ define_class!(
             unsafe { window.setReleasedWhenClosed(false) };
 
             // Set various window properties.
-            window.setTitle(ns_string!("A window"));
+            window.setTitle(ns_string!("Hey|Ho"));
+            unsafe {
+                window.setBackgroundColor(Some(&NSColor::colorWithSRGBRed_green_blue_alpha(
+                    1.0, 1.0, 1.0, 1.0,
+                )));
+            }
+
             let view = window.contentView().expect("window must have content view");
-            unsafe { view.addSubview(&text_field) };
+            unsafe { view.addSubview(&text_field_hello) };
+            unsafe { view.addSubview(&text_field_world) };
             window.center();
             unsafe { window.setContentMinSize(NSSize::new(300.0, 300.0)) };
             window.setDelegate(Some(ProtocolObject::from_ref(self)));
