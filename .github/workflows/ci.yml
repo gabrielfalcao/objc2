@@ -74,7 +74,7 @@ env:
 jobs:
   fmt:
     name: Check formatting
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -90,7 +90,7 @@ jobs:
 
   lint:
     name: Lint ${{ matrix.name }}
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     strategy:
       # These jobs are "cheap" to run, will likely run in parallel anyhow, and
@@ -169,7 +169,7 @@ jobs:
 
   msrv:
     name: Check MSRV
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     env:
       CARGO_BUILD_TARGET: x86_64-apple-darwin
@@ -200,7 +200,7 @@ jobs:
 
   ui:
     name: Compiler UI
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     needs:
     - fmt
     - lint
@@ -236,7 +236,7 @@ jobs:
 
   assembly:
     name: Assembly tests
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     needs:
     - fmt
     - lint
@@ -611,7 +611,7 @@ jobs:
 
   test-gnustep:
     name: ${{ matrix.name }}
-    runs-on: ${{ matrix.os || 'ubuntu-latest' }}
+    runs-on: ${{ matrix.os || 'macos-latest' }}
     needs:
     - fmt
     - lint
@@ -858,7 +858,7 @@ jobs:
 
   test-compiler-rt:
     name: Test Compiler-RT
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     needs:
     - fmt
     - lint
